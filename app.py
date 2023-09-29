@@ -20,7 +20,7 @@ def index():
                 try:
 
                     # query to search for images
-                    query = request.form['content'].replace(" ","")
+                    query = request.form['content'].replace(" ","+")
 
                             # directory to store downloaded images
                     save_directory = "images/"
@@ -35,7 +35,7 @@ def index():
                     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"}
 
                             # fetch the search results page
-                    response = requests.get(f"https://www.google.com/search?q={query}&sxsrf=AJOqlzUuff1RXi2mm8I_OqOwT9VjfIDL7w:1676996143273&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiq-qK7gaf9AhXUgVYBHYReAfYQ_AUoA3oECAEQBQ&biw=1920&bih=937&dpr=1#imgrc=1th7VhSesfMJ4M")
+                    response = requests.get(f"https://www.google.com/search?sca_esv=565038199&sxsrf=AM9HkKmyH-IqwOUg6Li5bZKcM9hUwEBSOQ:1694623690928&q={query}&tbm=isch&source=lnms&sa=X&ved=2ahUKEwiIroCZhaiBAxUVZ_UHHc1_Cg8Q0pQJegQIDxAB&biw=1536&bih=760&dpr=1.25")
 
 
                             # parse the HTML using BeautifulSoup
@@ -58,7 +58,7 @@ def index():
                                 img_data.append(mydict)
                                 with open(os.path.join(save_directory, f"{query}_{image_tags.index(image_tag)}.jpg"), "wb") as f:
                                     f.write(image_data)
-                    client = pymongo.MongoClient("mongodb+srv://snshrivas:Snshrivas@cluster0.ln0bt5m.mongodb.net/?retryWrites=true&w=majority")
+                    client = pymongo.MongoClient("mongodb+srv://trisharoy_37:Okaybye5@cluster1.yt1sd.mongodb.net/?retryWrites=true&w=majority")
                     db = client['image_scrap']
                     review_col = db['image_scrap_data']
                     review_col.insert_many(img_data)          
